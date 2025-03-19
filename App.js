@@ -1,23 +1,12 @@
 import "react-native-gesture-handler";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
+import LocalAPI from "./src/JSONServer/LocalAPI";
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text className="text-green-500">
-        Open up App.js to start working on your app!
-      </Text>
-      <StatusBar style="auto" />
+    <View className="flex-1">
+      <LocalAPI />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
