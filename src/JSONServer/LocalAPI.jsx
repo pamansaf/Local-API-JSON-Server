@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import * as ImagePicker from "expo-image-picker";
+import Axios from "axios";
 
 const LocalAPI = () => {
   // start image Picker =====================
@@ -30,6 +31,25 @@ const LocalAPI = () => {
     }
   };
   // end image Picker =====================
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [city, setCity] = useState("");
+
+  const submit = () => {
+    const data = {
+      name,
+      email,
+      city,
+    };
+    // console.log("data before sent", data);
+    Axios.post("http://10.0.2.2:3004", data).then((res) => {
+      console.log("res: ", res);
+      setName("");
+      setEmail("");
+      setCity("");
+    });
+  };
   return (
     <View className="flex-1 bg-cyan-50 p-5">
       <View className="w-[90%] mx-auto bg-green-200 mt-3 p-5 rounded-lg">
@@ -66,14 +86,24 @@ const LocalAPI = () => {
               className="flex-row items-center bg-white px-4 my-1 rounded-md"
             >
               <Ionicons name="person-outline" size={17} color="gray" />
-              <TextInput placeholder="Full Name" className="w-full pl-2" />
+              <TextInput
+                placeholder="Full Name"
+                value={name}
+                onChangeText={(value) => setName(value)}
+                className="w-full pl-2"
+              />
             </View>
             <View
               style={{ elevation: 3 }}
               className="flex-row items-center bg-white px-4 my-1 rounded-md"
             >
               <Ionicons name="mail-outline" size={17} color="gray" />
-              <TextInput placeholder="Email Address" className="w-full pl-2" />
+              <TextInput
+                placeholder="Email Address"
+                value={email}
+                onChangeText={(value) => setEmail(value)}
+                className="w-full pl-2"
+              />
             </View>
             <View
               style={{ elevation: 3 }}
@@ -82,10 +112,13 @@ const LocalAPI = () => {
               <Ionicons name="location-outline" size={17} color="gray" />
               <TextInput
                 placeholder="City / Location"
+                value={city}
+                onChangeText={(value) => setCity(value)}
                 className="w-full pl-2"
               />
             </View>
             <TouchableOpacity
+              onPress={submit}
               style={{ elevation: 3 }}
               className="bg-blue-500 py-2 rounded-md mt-3"
             >

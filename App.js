@@ -1,14 +1,14 @@
 import "react-native-gesture-handler";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
-import LocalAPI from "./src/JSONServer/LocalAPI";
-import ImagePickerExample from "./src/ImagePicker";
+import StackNav from "./src/navigation/StackNav";
 
 export default function App() {
   return (
-    <View className="flex-1">
-      <LocalAPI />
-      {/* <ImagePickerExample /> */}
-    </View>
+    <NavigationContainer>
+      <StatusBar style="light" />
+      <StackNav />
+    </NavigationContainer>
   );
 }
